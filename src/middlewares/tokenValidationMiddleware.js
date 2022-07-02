@@ -1,3 +1,5 @@
+import db from "../db.js";
+
 export async function tokenValidationMiddleware(req, res, next) {
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '')
@@ -9,12 +11,8 @@ export async function tokenValidationMiddleware(req, res, next) {
     if (!session) {
       return res.sendStatus(401)
     }
-  
-    const user = await db.collection('users').findOne({ _id: session.userId });
-    if (!user) {
-      return res.sendStatus(401);
-    }
-  
-    res.locals.user = user;
+    
+    res.locals.user = "das";
+    res.locals.userId = session.userId;
     next();
 }

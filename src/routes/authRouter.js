@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { signUp, signIn } from '../controllers/authController.js';
-import userSchemaValidationMiddleware from '../middlewares/userSchemaValidationMiddleware.js';
+import sinUpSchemaValidationMiddleware from '../middlewares/signUpSchemaValidationMiddleware.js';
+import signInSchemaValidationMiddleware from '../middlewares/signInSchemaValidationMiddleware.js';
+
 
 const authRouter = Router();
-authRouter.post("/sign-up", userSchemaValidationMiddleware, signUp);
-authRouter.post("/sign-in", signIn);
+authRouter.post("/sign-up", sinUpSchemaValidationMiddleware, signUp);
+authRouter.post("/sign-in", signInSchemaValidationMiddleware, signIn);
 export default authRouter;

@@ -42,7 +42,7 @@ export async function signIn(req, res) {
           });
     }
 
-    res.send(token);
+    res.send({token, name:user.name});
   } else {
     res.sendStatus(401);
   }

@@ -11,28 +11,28 @@ export async function getTransactions(req, res) {
 
 export async function postDeposit(req, res) {
   const  userId  = res.locals.userId;
-  const  deposite  = req.body;
+  const  deposit  = req.body;
   const userTransactions = await db.collection('transactions').findOne({userId})
 
-  const treatedDeposite = 
+  const treatedDeposit = 
   {
-    ...deposite,
+    ...deposit,
     date: dayjs().format('DD/MM'),
-    type:"deposite"
+    type:"deposit"
   }
 
   // if is the frist time user makes a transactions, creat a document in 'transactions' for him
   if(!userTransactions){
     await db.collection('transactions').insertOne
       ({ userId, 
-        transactions:[treatedDeposite] 
+        transactions:[treatedDeposit] 
       });
   }
   else{
     await db.collection('transactions').updateOne({
           userId
         }, {
-          $set: {transactions: [...userTransactions.transactions, treatedDeposite]}
+          $set: {transactions: [...userTransactions.transactions, treatedDeposit]}
         });
   }
   res.sendStatus(200)

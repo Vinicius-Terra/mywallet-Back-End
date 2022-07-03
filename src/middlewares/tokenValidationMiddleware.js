@@ -12,7 +12,6 @@ export async function tokenValidationMiddleware(req, res, next) {
       return res.sendStatus(401)
     }
     
-    res.locals.user = "das";
     res.locals.userId = session.userId;
     next();
 }
